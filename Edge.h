@@ -2,18 +2,17 @@
 #define EDGE_H_INCLUDED
 
 #include <iostream>
-using namespace std;
+#include "Vertex.h"
 
-class Edge {
-private:
-	// Class members
-public:
-	// Constructor
-	Edge() {}
+template<class T> class Edge
+{
+	private:
 
-	// Destructor
-	~Edge() {}
+
+
 
 };
 
-#endif
+
+
+#endif //3EDGE_H_INCLUDED

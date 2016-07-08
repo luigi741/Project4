@@ -1,2 +1,2 @@
 all:
-	g++ -o main main.cpp Vertex.h Edge.h Graph.h PrimsAlgorithm.h
+	g++ -o main main.cpp Vertex.h Edge.h DirGraph.h Graph.h PrimsAlgorithm.h

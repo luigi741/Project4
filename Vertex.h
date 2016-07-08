@@ -1,17 +1,39 @@
 #ifndef VERTEX_H_INCLUDED
 #define VERTEX_H_INCLUDED
 
-class Vertex {
-private:
-	// Class members
+#include <iostream>
+#include "Edge.h"
 
-public:
-	// Constructor
-	Vertex() {}
+template<class T> class Vertex
+{
+	private:
+		T data;
 
-	// Destructor
-	~Vertex() {}
+
+	public:
+		Vertex(T &_data)
+		{
+			data = _data;
+		}
+		~Vertex()
+		{}
+
+		const T &getData() const
+		{
+			return data;
+		}
+
+		bool operator==(const Vertex &_ver) const
+		{
+			return getData() == _ver.getData();
+		}
+		bool operator!=(const Vertex &_ver) const
+		{
+			return !(*this == _ver);
+		}
 
 };
 
-#endif
+
+
+#endif //VERTEX_H_INCLUDED
