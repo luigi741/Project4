@@ -4,34 +4,33 @@
 #include <iostream>
 #include "Edge.h"
 
-template<class T> class Vertex
+template<class Type> class Vertex
 {
 	private:
-		T data;
+		Type data;
 
 
 	public:
-		Vertex(T &_data)
+		Vertex(Type _data)
 		{
 			data = _data;
 		}
 		~Vertex()
 		{}
 
-		const T &getData() const
+		Type get_Data()
 		{
 			return data;
 		}
 
 		bool operator==(const Vertex &_ver) const
 		{
-			return getData() == _ver.getData();
+			return get_Data() == _ver.get_Data();
 		}
 		bool operator!=(const Vertex &_ver) const
 		{
 			return !(*this == _ver);
 		}
-
 };
 
 

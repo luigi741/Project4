@@ -2,9 +2,12 @@
 #define HASHTABLE_H_INCLUDED
 
 #include <iostream>
+#include <string>
 #include <vector>
 #include <list>
+#include "Vertex.h"
 #include "Edge.h"
+#include "LinkList.h"
 
 //Vector
 /*
@@ -13,13 +16,14 @@
 -->begin()
 -->end()
 --
-*/
+
 
 
 //List
-/*
+
 -->clear()
 --> ::iterator
+--> pushback
 -->
 
 */
@@ -27,17 +31,27 @@
 
 using namespace std;
 
-template<class HashObj> class HashTable
+
+template<class Type> class HashTable
 {
 	private:
 		int currentSize;
-		vector<list<HashObj>> Table; 
+		//vector<list<Type>> Table;
+		LinkList<Type>* Table[]; 
 
-		void ReHash()
+		/*void ReHash()
 		{
-			vector<list<HashObj>> oldTable = Table;
+			//First set a ew table equal to our current table
+			//2. Double the current Table size
+			//3. Clear the current table.
+			//4. insert values from oldTable into newTable.
+			
+			//vector<list<Type>> oldTable = Table;
+			
+			LinkList<Type>* oldTable[] = nTable;
 
-			//new table double size
+			//nTable.
+
 			Table.resize(nextPrime(2 * Table.size())); 
 			for(int i = 0; i < Table.size(); i++)
 			{
@@ -48,35 +62,47 @@ template<class HashObj> class HashTable
 			currentSize = 0;
 			for(int i = 0; i < Table.size(); i++)
 			{
-				list<HashObj>::iterator iter = oldTable[i].begin();
+				list<Type>::iterator iter = oldTable[i].begin();
 				while(iter != oldTable[i].end())
 				{
 					Insert(*iter++);
 				}
 			}
 
-		}
+		}*/
 
-		int MyHash(const string& _key) const
+		int MyHash(string _key) const 
 		{
-			int hashV = hash(_key);
+			//Using the second letter of the key to the word.
+			int i = 0;
+			int hashV;
 
-			hashV %= Table.size(); 
-			if(hashV < 0)
+			while(i < _key.length())
 			{
-				hashV += Table.size(); 
+				hashV += _key[i];
+				i++;
 			}
+			
+
+			hashV %= currentSize; 
 
 			return hashV;
 		};
 
 	public:
-		HashTable(int size)
+		HashTable(int _size)
 		{
-			//
+			currentSize = _size;
+			for(int i = 0; i < currentSize; i++)
+			{
+				Table[i] = NULL;
+			}
+			
 		}
 
-		bool Contains(const HashObj &x);
+		~HashTable(){}
+
+		/*bool Contains(const Type &x);
 
 		void Clear()
 		{
@@ -85,31 +111,41 @@ template<class HashObj> class HashTable
 				Table.clear(); // list ###
 			}
 		}
+		*/
 
-		bool Insert(const HashObj &x)
+		bool Insert(Type* _vertex)
 		{
 			//O(n) in the length of the list at the hashed bucket.
-			list<HashObj> &list = Table[MyHash(x)];
-			if(find(list.begin(), list.end(), x) != list.end()) // list ###
+
+			LinkList<Type>* list = Table[MyHash(_vertex->get_Data())];
+
+			if(list == NULL)
 			{
-				return false;
+				list = new LinkList<Type>;
 			}
-			list.push_back(x); //list ###
+
+
+			//CRASHING AFTER 3 INPUTS MAYBE NEED TO ACCOUNT FOR WHEN 
+			//LIST != null?
+			cout << "HashIndex: " << MyHash(_vertex->get_Data()) << endl;
+			cout << "Debug1" << endl;
+			list->add_node(_vertex->get_Data());
+			cout << "Debug2" << endl;
 
 			//Rehashing
-			if(++currentSize > Table.size()) //list ###
+			/*if(++currentSize > Table.size()) //list ###
 			{
 				ReHash();
-			}
+			}*/
 			return true;
 		}
 
-
-		bool Remove(const HashObj& x)
+/*
+		bool Remove(const Type& x)
 		{
-			list<HashObj> &list = Table[MyHash(x)];
+			list<Type> &list = Table[MyHash(x)];
 
-			list<HashObj>::iterator iter = find(list.begin(), list.end(), x); // list ###
+			list<Type>::iterator iter = find(list.begin(), list.end(), x); // list ###
 
 			if(iter == list.end()) // list ###
 			{
@@ -119,7 +155,34 @@ template<class HashObj> class HashTable
 			list.erase(iter); // list ###
 			--currentSize;
 			return true;
-		}
+		}*/
+
+		void printTable()
+	    {
+	        cout << "The Hash Table has the following entries: " <<endl;
+	        cout << "***********************" << endl;
+
+	        int i = 0;
+
+	        while(i < currentSize)
+	        {
+	            cout << "HashTable[" << i << "]: ";
+	            if(Table[i] == NULL)
+	            {
+	            	Table[i] = new LinkList<Type>();
+	            }
+
+	            Table[i]->print_List();
+	            i++;
+	            cout << endl;
+	        }
+
+	        /*cout << "Size: " << this->Size << endl;
+	        cout << "Capacity: " << this->Capacity << endl;
+	        cout << "Entries: " << this->entries << endl;
+	        cout << "loadf : " << this->loadFactor << endl;
+	        cout << "************************" << endl;*/
+	    }
 };
 
 #endif //HASHTABLE_H_INCLUDED
