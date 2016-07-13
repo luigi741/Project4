@@ -15,7 +15,8 @@ public:
 	~PrimsAlgorithm() {}
 
 	// Returns TRUE if the graph is empty, FALSE otherwise
-	bool empty() const {
+	bool empty() const 
+	{
 
 	}
 

@@ -7,20 +7,25 @@
 #include <string>
 #include "Vertex.h"
 #include "HashTable.h"
+#include "Graph.h"
 
 using namespace std;
 
 
 int main() 
 {
-	int opCode = 0;
+	Graph prims = Graph<Type>(5);
+
+}
+
+int other()
+{
+		int opCode = 0;
 	cout << "****Testing HashTable****" << endl;
 	cout << "Initiate array of LL." << endl;
 
 	HashTable<Vertex<string> > Table = HashTable<Vertex<string> >(5);
 
-
-	
 	while(true)
 	{
 		cout << "**************" << endl;
@@ -65,13 +70,10 @@ int main()
 				cout << "*****CURRENT TABLE*****" << endl;
 
 				Table.printTable();
+
 				break;
 			}
 		}	
 
 	}
-		
-	
-	
-	
 }

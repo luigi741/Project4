@@ -6,6 +6,7 @@
 
 using namespace std;
 
+//Type== Vertex
 template<class Type> class Node
 {
 	private:
@@ -19,7 +20,7 @@ template<class Type> class Node
 			next = NULL;
 		}
 
-		Node(Type &vertex): next(NULL)
+		Node(Vertex &vertex): next(NULL)
 		{
 			storedVertex = &vertex;
 		}
@@ -41,6 +42,7 @@ template<class Type> class Node
 
 };
 
+//Type == Vertex
 template<class Type> class LinkList
 {
 	private:

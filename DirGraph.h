@@ -4,12 +4,12 @@
 #include <iostream>
 #include "Vertex.h"
 
-template<class T> class DirGraph
+template<class Type> class DirGraph
 {
 	private:
-		Vertex<T>* vertices[];
-		Edge<T>* edges[];
 
+	public:
+		
 
 
 };

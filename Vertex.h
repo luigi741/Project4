@@ -2,25 +2,46 @@
 #define VERTEX_H_INCLUDED
 
 #include <iostream>
+#include <string>
 #include "Edge.h"
 
-template<class Type> class Vertex
+using namespace std;
+
+class Edge;
+
+//Type is string
+class Vertex
 {
 	private:
-		Type data;
+		string name;
+		string data;
+		Edge* edges;
+		bool Visited;
 
 
 	public:
-		Vertex(Type _data)
+		Vertex(string _name, string _data)
 		{
+			name = _name;
 			data = _data;
+			Visited = false;
 		}
 		~Vertex()
 		{}
 
-		Type get_Data()
+		string get_Data()
 		{
 			return data;
+		}
+
+		string get_Name()
+		{
+			return name;
+		}
+
+		bool visited()
+		{
+			Visited = true;
 		}
 
 		bool operator==(const Vertex &_ver) const
