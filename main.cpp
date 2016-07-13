@@ -6,74 +6,76 @@
 #include <iostream>
 #include <string>
 #include "Vertex.h"
-#include "HashTable.h"
 #include "Graph.h"
 
 using namespace std;
 
 
-int main() 
+#include <iostream>
+#include "Graph.h"
+
+using namespace std;
+
+int main()
 {
-	Graph prims = Graph<Type>(5);
+	Graph <double> g(5);
 
-}
+	//make sure to fill up the entire table or there will be segmentation faults
+	g.addVertex("Bb", 5.78);
+	g.addVertex("Cc", 6.5);
+	g.addVertex("Dd", 553.98);
+	g.addVertex("Ee", 21.21);
+	g.addVertex("Ff", 3.98);
 
-int other()
-{
-		int opCode = 0;
-	cout << "****Testing HashTable****" << endl;
-	cout << "Initiate array of LL." << endl;
+	cout << "Is grapgh Connected " << g.isConnected();
+	cout << endl;
 
-	HashTable<Vertex<string> > Table = HashTable<Vertex<string> >(5);
-
-	while(true)
-	{
-		cout << "**************" << endl;
-		cout << "Hash Functions" << endl;
-		cout << "0. Quit" << endl;
-		cout << "1. Insert" << endl;
-		cout << "2. Display" << endl;
-		cout << "-->";
-		cin >> opCode;
-
-		cout << "Hello" << endl;
-		if(opCode == 0)
-		{
-			return 0;
-		}
-
-		switch(opCode)
-		{
-			case 1:
-			{
-				string data;
-				while(data != "0")
-				{
-					cout << "*****Insert*****" << endl;
-					cout << "~Enter \'0\' to exit" << endl;
-					cout << "Data(string) to insert: ";
-					cin >> data;
-
-					if(data == "0") break;
-
-					Vertex<string>* vertex = new Vertex<string>(data);	
-					bool insert;
-					//cout << "DEBUG:: going into Insert()" << endl;
-					insert = Table.Insert(vertex);
-				}
+	g.addEdge("Dd", "Bb", 89.34);
+	g.addEdge("Cc", "Ee", 3.4);
 	
-				break;
-			}
+	cout << "Is grapgh Connected " << g.isConnected();
+	cout << endl;
 
-			case 2:
-			{
-				cout << "*****CURRENT TABLE*****" << endl;
+	g.addEdge("Bb", "Bb", 4.20);
+	g.addEdge("Ee", "Ff", 5.09);
 
-				Table.printTable();
+	cout << "Is grapgh Connected " << g.isConnected();
+	cout << endl;
 
-				break;
-			}
-		}	
+	g.addEdge("Cc", "Dd", 0.67);
+	g.addEdge("Dd", "Cc", 1.34);
 
-	}
+	cout << "Is grapgh Connected " << g.isConnected();
+	cout << endl;
+
+	g.printGraph();
+	cout << endl;
+
+	cout << "Degree of Vertex Cc: " << g.degree("Cc");
+	cout << endl;
+
+	g.addEdge("Cc", "Ee", 0);
+
+	cout << "Is grapgh Connected " << g.isConnected();
+	cout << endl;
+
+	g.printGraph();
+	cout << endl;
+
+	cout << "Degree of Vertex Bb: " << g.degree("Bb");
+	cout << endl;
+
+	cout << "Degree of Vertex Cc: " << g.degree("Cc");
+	cout << endl;
+
+	cout << "Weight of Edge between Bb and Bb is " << g.adjacent("Bb", "Bb");
+	cout << endl;
+
+	cout << "Weight of Edge between Cc and Bb is " << g.adjacent("Cc", "Bb");
+	cout << endl;
+
+	cout << "Weight of Edge between Cc and Dd is " << g.adjacent("Cc", "Dd");
+	cout << endl;
+
+	return 0;
 }

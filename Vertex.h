@@ -2,58 +2,49 @@
 #define VERTEX_H_INCLUDED
 
 #include <iostream>
-#include <string>
-#include "Edge.h"
 
 using namespace std;
 
-class Edge;
+template <class Type> class Graph;
+template <class Type> class Edge;
 
-//Type is string
-class Vertex
+template <class Type> class Vertex
 {
-	private:
-		string name;
-		string data;
-		Edge* edges;
-		bool Visited;
+friend class Edge <Type>;
+friend class Graph <Type>;
+private:
+	string name;
+	Type data;
+	double weight;
+	bool visited;
+	Vertex *next;
+public:
+	Vertex(string name, Type data, double weight): next(NULL), visited(false)
+	{
+		this->name = name;
+		this->data = data;
+		this->weight = weight;
+	}
 
+	string getName() const{
+		return this->name;
+	}
 
-	public:
-		Vertex(string _name, string _data)
-		{
-			name = _name;
-			data = _data;
-			Visited = false;
-		}
-		~Vertex()
-		{}
+	Type getData() const{
+		return this->data;
+	}
+	
+	double getWeight() const{
+		return this->weight;
+	}
 
-		string get_Data()
-		{
-			return data;
-		}
+	bool getVisited() const{
+		return this-> visited;
+	}
 
-		string get_Name()
-		{
-			return name;
-		}
-
-		bool visited()
-		{
-			Visited = true;
-		}
-
-		bool operator==(const Vertex &_ver) const
-		{
-			return get_Data() == _ver.get_Data();
-		}
-		bool operator!=(const Vertex &_ver) const
-		{
-			return !(*this == _ver);
-		}
+	Vertex *getNext() const{
+		return this->next;
+	}
 };
-
-
 
 #endif //VERTEX_H_INCLUDED

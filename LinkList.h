@@ -3,7 +3,6 @@
 
 #include <iostream>
 
-
 using namespace std;
 
 //Type== Vertex
@@ -20,7 +19,7 @@ template<class Type> class Node
 			next = NULL;
 		}
 
-		Node(Vertex &vertex): next(NULL)
+		Node(Type &vertex): next(NULL)
 		{
 			storedVertex = &vertex;
 		}
@@ -76,7 +75,7 @@ template<class Type> class LinkList
             while (head != NULL)
             {
                 Node<Type>* tmp = head;
-                head = head->next;
+                head = head->get_Next();
                 delete tmp;
             }
             sz = 0;
