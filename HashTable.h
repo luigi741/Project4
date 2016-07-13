@@ -97,7 +97,6 @@ template<class Type> class HashTable
 			{
 				Table[i] = NULL;
 			}
-			
 		}
 
 		~HashTable(){}
@@ -117,13 +116,17 @@ template<class Type> class HashTable
 		{
 			//O(n) in the length of the list at the hashed bucket.
 
-			LinkList<Type>* list = Table[MyHash(_vertex->get_Data())];
+			int index = MyHash(_vertex->get_Data());
 
-			if(list == NULL)
+			if(Table[index] == NULL)
 			{
+				LinkList<Type>* list = Table[index];
 				list = new LinkList<Type>;
 			}
 
+			LinkList<Type>* list = Table[index];
+			bool l = Table[index].is_Empty();
+			cout << l;
 
 			//CRASHING AFTER 3 INPUTS MAYBE NEED TO ACCOUNT FOR WHEN 
 			//LIST != null?
