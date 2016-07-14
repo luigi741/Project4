@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <iostream>
+#include "Vertex.h"
 //#include "AdjListNode.h"
 #include "Edge.h"
 
@@ -16,8 +17,9 @@ using namespace std;
 template <class Type> class Graph
 {
 private:
-	Edge <Type> *array; //stores the vertices 
-	int graphSize;
+	Edge<Type> *array; //stores the vertices in HashTable
+	ActualEdge *edgeArray;
+	int graphSize; //?
 	int size; //number of vertrices in the graph
 	int num_edges; //number of egdes in a graph
 
@@ -36,11 +38,13 @@ private:
 public:
 	Graph(int n):size(0), num_edges(0)
 	{
-		if(n <= 0){
+		if(n <= 0)
+		{
 			n = 25;
 			graphSize = n;
 		}
-		else {
+		else 
+		{
 			graphSize = n;
 		}
 
@@ -91,7 +95,8 @@ public:
 	{
 		for (int i = 0; i < graphSize; ++i)
 		{
-			if(array[i].head->getName() == name){
+			if(array[i].head->getName() == name)
+			{
 				return array[i].head->getData();
 			}
 		}
@@ -124,12 +129,20 @@ public:
 	{
 
 	}
-
+*/
 	//Returns the minimum spanning tree of those vertices which are connected to vertex v. 
 	//Throw an illegal argument exception if the arguments do not correspond to existing vertices.
-	void MST(string v)
+/*	void MST(string v)
 	{
+		Vector<Type> *mst;
 
+		//prims algorithm
+		int index = hash(v);
+
+		for(int i = 0; i < graphSize; i++)
+		{
+
+		}
 	}*/
 
 	void printGraph()
@@ -168,13 +181,21 @@ public:
 		int index1 = hash(src);
 		int index2 = hash(dst);
 
+		/*edgeArray = new ActualEdge new ActualEdge[10];
+		if(num_edges > )
+		{
+			edgeArray = new ActualEdge[20];
+		}*/
+
 		if(array[index1].head == NULL || array[index2].head == NULL){
-			cout << "One of these vertex dosen't exist." << endl;
+			cout << "One of these vertices doesn't exist." << endl;
 		}
+
 		else if(index1 == index2){
 			cout << "Illegal. Same vertex" << endl;
 		}
-		else if(weight == 0){
+
+		else if(weight == 0) {
 			if(array[index1].find_Node(dst)){
 				array[index1].del(dst);
 				array[index2].del(src);
@@ -182,6 +203,7 @@ public:
 				num_edges--;
 			}
 		}
+
 		else{
 			if(array[index1].find_Node(dst)){
 				array[index1].changeWeight(dst, weight);
@@ -210,12 +232,12 @@ public:
 	{
 
 	}
-	
+	*/
 	//Iterates over all vertices in the graph and marks them as unvisited.
 	void reset()
 	{
 
-	}*/
+	}
 };
 
 #endif

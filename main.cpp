@@ -26,26 +26,27 @@ int main()
 	g.addVertex("Dd", 553.98);
 	g.addVertex("Ee", 21.21);
 	g.addVertex("Ff", 3.98);
+	g.addVertex("Gg", 4.201);
 
-	cout << "Is grapgh Connected " << g.isConnected();
+	cout << "Is graph Connected " << g.isConnected();
 	cout << endl;
 
 	g.addEdge("Dd", "Bb", 89.34);
-	g.addEdge("Cc", "Ee", 3.4);
+	g.addEdge("Cc", "Ee", 3.4); //Cc Ee
 	
-	cout << "Is grapgh Connected " << g.isConnected();
+	cout << "Is graph Connected " << g.isConnected();
 	cout << endl;
 
-	g.addEdge("Bb", "Bb", 4.20);
+	g.addEdge("Bb", "Bb", 4.20); 
 	g.addEdge("Ee", "Ff", 5.09);
 
-	cout << "Is grapgh Connected " << g.isConnected();
+	cout << "Is graph Connected " << g.isConnected();
 	cout << endl;
 
 	g.addEdge("Cc", "Dd", 0.67);
 	g.addEdge("Dd", "Cc", 1.34);
 
-	cout << "Is grapgh Connected " << g.isConnected();
+	cout << "Is graph Connected " << g.isConnected();
 	cout << endl;
 
 	g.printGraph();
@@ -56,7 +57,7 @@ int main()
 
 	g.addEdge("Cc", "Ee", 0);
 
-	cout << "Is grapgh Connected " << g.isConnected();
+	cout << "Is graph Connected " << g.isConnected();
 	cout << endl;
 
 	g.printGraph();

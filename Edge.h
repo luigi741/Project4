@@ -13,8 +13,8 @@ template <class Type> class Edge
 {
 friend class Graph <Type>;
 private:
-	Vertex <Type> *head;
-	Vertex <Type> *tail;
+	Vertex<Type> *head;
+	Vertex<Type> *tail;
 	int size;
 public:
 	Edge(): head(NULL), tail(NULL), size(0)
@@ -58,7 +58,7 @@ public:
 		}
 	}
 		
-	Vertex <Type> *Tail() const {
+	Vertex<Type> *Tail() const {
 		if(empty() == true){
 			throw underflow_error("List empty. Cannot retrieve tail object.\n");
 		}
@@ -68,7 +68,7 @@ public:
 	}
 	
 	int count (const string &name) const{
-		Vertex <Type> *current = head;
+		Vertex<Type> *current = head;
 		int nodes = 0;
 		
 		while(current != NULL){
@@ -85,14 +85,14 @@ public:
 		
 	void insert(const string &name, const Type &data)
 	{
-		Vertex <Type> *new_node;
+		Vertex<Type> *new_node;
 	
-		if(empty() == true){
+		if(empty() == true) {
 			new_node = new Vertex <Type> (name, data, 0.0);
 			head = new_node;
 			tail = new_node;
 		}
-		else{
+		else {
 			new_node = new Vertex <Type> (name, data, 0.0);
 			
 			tail->next = new_node;
