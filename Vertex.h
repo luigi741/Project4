@@ -7,13 +7,6 @@ using namespace std;
 
 template <class Type> class Graph;
 template <class Type> class Edge;
-template <class Type> class Vertex;
-
-struct ActualEdge{
-	double edgeWeight;
-	Vertex<double>* edgeHead;
-	Vertex<double>* edgeTail;
-};
 
 template <class Type> class Vertex
 {
@@ -24,7 +17,6 @@ private:
 	Type data;
 	double weight;
 	bool visited;
-	ActualEdge* edgeArray;
 
 	Vertex *next;
 public:
@@ -51,18 +43,17 @@ public:
 		return this->visited;
 	}
 
-	Vertex *getNext() const{
-		return this->next;
+	void setVisitedTrue()
+	{
+		this->visited == true;
+	}
+	
+	void setVisitedFalse(){
+		this->visited = false;
 	}
 
-	void addEdge()
-	{
-		if(edgeArray == NULL)
-		{
-			edgeArray = new ActualEdge;
-			return;
-		}
-
+	Vertex *getNext() const{
+		return this->next;
 	}
 };
 

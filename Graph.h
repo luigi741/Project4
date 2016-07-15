@@ -14,11 +14,12 @@
 
 using namespace std;
 
+//template<class Type> class Vertex;
+
 template <class Type> class Graph
 {
 private:
-	Edge<Type> *array; //stores the vertices in HashTable
-	ActualEdge *edgeArray;
+	Edge<Type> *array; //stores the vertices in HashTable/AdjList
 	int graphSize; //?
 	int size; //number of vertrices in the graph
 	int num_edges; //number of egdes in a graph
@@ -102,6 +103,18 @@ public:
 		}
 	}
 
+	Vertex<Type>* findVertex(const string &name)
+	{
+		for (int i = 0; i < graphSize; ++i)
+		{
+			if(array[i].head->getName() == name)
+			{
+				return array[i].head;
+			}
+
+		}
+	}
+
 	//returns the weight of the edge between the two vertices
 	double adjacent(string u, string v)
 	{
@@ -130,23 +143,87 @@ public:
 
 	}
 */
+	Vertex<Type>* min(Vertex<Type>* num, Vertex<Type>* num1)
+	{
+		if(num->weight > num1->weight)
+		{
+			return num1;
+		}
+		return num;
+	}
+
+	Vertex<Type>* minWeight(const string _name)
+	{
+		int index = hash(_name);
+		Vertex<Type>* minimo;
+
+		Vertex<Type>* ptr = array[index].head;
+		Vertex<Type>* ptrNext = ptr->next;
+
+		//pick the minimum weight
+		while(ptrNext != NULL)
+		{
+			if(ptr->visited)
+			{
+				ptr = ptr->next;
+			}
+			//cout << "DEBUG1" << endl;
+			/*while(ptr->getVisited())
+			{
+				ptr = ptr->next;
+			}*/
+			//cout << "DEBUG2" << endl;
+			minimo = ptr;
+			minimo =  Graph::min(minimo, ptrNext);
+
+			ptr = ptr->getNext();
+			ptrNext = ptrNext->getNext();
+		}
+		return minimo;
+	}
+
 	//Returns the minimum spanning tree of those vertices which are connected to vertex v. 
 	//Throw an illegal argument exception if the arguments do not correspond to existing vertices.
-/*	void MST(string v)
+	void MST(string v)
 	{
-		Vector<Type> *mst;
+		Vertex<Type>* mst;
+		Vertex<Type>* minW;
 
 		//prims algorithm
 		int index = hash(v);
 
+
+		//Set all Vertex->visited to false, except v's
 		for(int i = 0; i < graphSize; i++)
 		{
-
+			mst = array[i].head;
+			while(mst->getNext() != NULL)
+			{
+				mst->setVisitedFalse();
+				mst = mst->getNext();
+			}
 		}
-	}*/
+
+		mst = findVertex(v);
+		//set start->visited true
+		mst->setVisitedTrue();
+		//Find minimum path
+		cout << "Root: " << mst->name << endl;
+		for(int i = 0; i < size; i++)
+		{
+			minW = minWeight(mst->getName());
+			minW->setVisitedTrue();
+			cout << i+1 << ": " << minW->name << endl;
+			mst = minW;
+		}
+		
+
+
+	}
 
 	void printGraph()
 	{
+		cout << "PRINT GRAPH" << endl;
 		for (int i = 0; i < graphSize; ++i)
 		{
 			
@@ -155,7 +232,7 @@ public:
 
 			cout << endl;
 
-			cout << "Adjacent Vertrices ";
+			cout << "Adjacent Vertices: ";
 			array[i].printList();
 			cout << endl;
 		}
@@ -180,12 +257,6 @@ public:
 	{
 		int index1 = hash(src);
 		int index2 = hash(dst);
-
-		/*edgeArray = new ActualEdge new ActualEdge[10];
-		if(num_edges > )
-		{
-			edgeArray = new ActualEdge[20];
-		}*/
 
 		if(array[index1].head == NULL || array[index2].head == NULL){
 			cout << "One of these vertices doesn't exist." << endl;
@@ -236,7 +307,7 @@ public:
 	//Iterates over all vertices in the graph and marks them as unvisited.
 	void reset()
 	{
-
+		
 	}
 };
 

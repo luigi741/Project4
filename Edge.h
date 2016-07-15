@@ -16,6 +16,7 @@ private:
 	Vertex<Type> *head;
 	Vertex<Type> *tail;
 	int size;
+	double edgeWeight;
 public:
 	Edge(): head(NULL), tail(NULL), size(0)
 	{}
@@ -67,7 +68,7 @@ public:
 		}
 	}
 	
-	int count (const string &name) const{
+	int count(const string &name) const{
 		Vertex<Type> *current = head;
 		int nodes = 0;
 		
@@ -115,6 +116,8 @@ public:
 		else{
 			new_node = new Vertex <Type> (name, data, weight);
 			
+
+
 			tail->next = new_node;
 			
 			tail = new_node;
@@ -192,11 +195,14 @@ public:
 	{
 		Vertex <Type> *current = head;
 
-		while(current != NULL) {
-			if(current->name == name) {
+		while(current != NULL) 
+		{
+			if(current->name == name) 
+			{
 				return current->getWeight();
 			}	
-			else {
+			else 
+			{
 				current = current->next;
 			}
 		}

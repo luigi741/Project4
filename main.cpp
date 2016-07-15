@@ -18,7 +18,7 @@ using namespace std;
 
 int main()
 {
-	Graph <double> g(5);
+	Graph<double> g(5);
 
 	//make sure to fill up the entire table or there will be segmentation faults
 	g.addVertex("Bb", 5.78);
@@ -26,13 +26,22 @@ int main()
 	g.addVertex("Dd", 553.98);
 	g.addVertex("Ee", 21.21);
 	g.addVertex("Ff", 3.98);
-	g.addVertex("Gg", 4.201);
 
-	cout << "Is graph Connected " << g.isConnected();
+	g.addEdge("Bb", "Cc", 2.0);
+	g.addEdge("Cc", "Dd", 3.0);
+	g.addEdge("Bb", "Dd", 4.0);
+	g.addEdge("Ee", "Ff", 5.0);
+	g.addEdge("Cc", "Ff", 6.0);
+
+	//g.printGraph();
+
+	g.MST("Bb");
+
+	/*cout << "Is graph Connected " << g.isConnected();
 	cout << endl;
 
 	g.addEdge("Dd", "Bb", 89.34);
-	g.addEdge("Cc", "Ee", 3.4); //Cc Ee
+	g.addEdge("Cc", "Ee", 3.4); //Cc Eel
 	
 	cout << "Is graph Connected " << g.isConnected();
 	cout << endl;
@@ -49,15 +58,17 @@ int main()
 	cout << "Is graph Connected " << g.isConnected();
 	cout << endl;
 
+	cout << endl;
 	g.printGraph();
 	cout << endl;
 
 	cout << "Degree of Vertex Cc: " << g.degree("Cc");
 	cout << endl;
 
-	g.addEdge("Cc", "Ee", 0);
-
+	//g.addEdge("Cc", "Ee", 0);
+	cout << "CCEE removed?" << endl;
 	cout << "Is graph Connected " << g.isConnected();
+
 	cout << endl;
 
 	g.printGraph();
@@ -77,6 +88,15 @@ int main()
 
 	cout << "Weight of Edge between Cc and Dd is " << g.adjacent("Cc", "Dd");
 	cout << endl;
+
+	
+	cout << endl;*/
+
+	//g.printGraph();
+
+
+
+
 
 	return 0;
 }
