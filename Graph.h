@@ -131,10 +131,24 @@ public:
 		}
 	}
 
-	/*//Performs BFS traversal starting on vertex v. Reset vertices after the traversal
-	void DFS(string v)
-	{
+	void DFS(string v) {
+		int i = hash(v);
+		int j;
 
+		Vertex<Type> *currentVertex = array[i].head;
+
+		while (currentVertex != NULL) {
+			j = hash(currentVertex->getName());
+			if (array[j].isVisited()) {
+				currentVertex = currentVertex->getNext();
+			}
+			else {
+				currentVertex->display();
+				array[j].Visit();
+				DFS(currentVertex->getName());
+				currentVertex = currentVertex->getNext();
+			}
+		}
 	}
 
 	//Performs BFS traversal starting on vertex v. Reset vertices after the traversal.
@@ -142,7 +156,7 @@ public:
 	{
 
 	}
-*/
+
 	Vertex<Type>* min(Vertex<Type>* num, Vertex<Type>* num1)
 	{
 		if(num->weight > num1->weight)
@@ -216,9 +230,6 @@ public:
 			cout << i+1 << ": " << minW->name << endl;
 			mst = minW;
 		}
-		
-
-
 	}
 
 	void printGraph()
@@ -307,7 +318,7 @@ public:
 	//Iterates over all vertices in the graph and marks them as unvisited.
 	void reset()
 	{
-		
+
 	}
 };
 
