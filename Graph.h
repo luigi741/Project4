@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <iostream>
+#include <math.h>
 #include "Vertex.h"
 //#include "AdjListNode.h"
 #include "Edge.h"
@@ -116,13 +117,16 @@ public:
 	{
 		int index = hash(u);
 
-		if(u == v){
+		int infinity = 0;
+		infinity = (pow(2, 64)) - 1;
+
+		if(u == v) {
 			return 0;
 		}
-		else if(array[index].find_Node(v) == false){
-			return 999.999; //infinity
+		else if(array[index].find_Node(v) == false) {
+			return infinity;
 		}
-		else{
+		else {
 			return array[index].weightofEdge(v);
 		}
 	}

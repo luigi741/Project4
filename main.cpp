@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <string>
+#include <math.h>
 #include "Vertex.h"
 #include "Graph.h"
 
@@ -95,6 +96,8 @@ int main()
 	//g.printGraph();
 	cout << "Initializing Depth First Search starting with 'Bb': " << endl;
 	g.DFS("Bb");
+
+	cout << (pow(2, 64) - 1) << endl;
 
 	return 0;
 }
