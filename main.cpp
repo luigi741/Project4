@@ -93,10 +93,8 @@ int main()
 	cout << endl;*/
 
 	//g.printGraph();
-
-
-
-
+	cout << "Initializing Depth First Search starting with 'Bb': " << endl;
+	g.DFS("Bb");
 
 	return 0;
 }

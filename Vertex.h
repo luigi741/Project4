@@ -55,6 +55,10 @@ public:
 	Vertex *getNext() const{
 		return this->next;
 	}
+
+	void display() const {
+		cout << "Vertex: " << this->name << endl;
+	}
 };
 
 #endif //VERTEX_H_INCLUDED

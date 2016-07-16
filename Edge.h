@@ -219,6 +219,14 @@ public:
 			current = current->next;
 		}
 	}
+
+	bool checkVisited() {
+		return head->visited;
+	}
+
+	void markVisited() {
+		head->visited = 1;
+	}
 };
 
 #endif

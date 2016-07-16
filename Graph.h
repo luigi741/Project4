@@ -60,8 +60,6 @@ public:
 		delete [] array;
 	}
 
-	/**************************************ACCESSORS**********************************************/
-
 	bool empty(){
 		return size == 0;
 	}
@@ -82,22 +80,20 @@ public:
 	}
 
 	//returns number of edges in the graph
-	int edgeCount(){
+	int edgeCount() {
 		return num_edges;
 	}
 
 	//returns true if all vertrices are connected
-	bool isConnected(){
+	bool isConnected() {
 		return num_edges == graphSize - 1;	
 	}
 
 	//finds the vertex with the same name and returns the data
 	Type find_Vertex(const string &name)
 	{
-		for (int i = 0; i < graphSize; ++i)
-		{
-			if(array[i].head->getName() == name)
-			{
+		for (int i = 0; i < graphSize; ++i) {
+			if(array[i].head->getName() == name) {
 				return array[i].head->getData();
 			}
 		}
@@ -139,12 +135,12 @@ public:
 
 		while (currentVertex != NULL) {
 			j = hash(currentVertex->getName());
-			if (array[j].isVisited()) {
+			if (array[j].checkVisited()) {
 				currentVertex = currentVertex->getNext();
 			}
 			else {
 				currentVertex->display();
-				array[j].Visit();
+				array[j].markVisited();
 				DFS(currentVertex->getName());
 				currentVertex = currentVertex->getNext();
 			}
@@ -208,11 +204,9 @@ public:
 
 
 		//Set all Vertex->visited to false, except v's
-		for(int i = 0; i < graphSize; i++)
-		{
+		for(int i = 0; i < graphSize; i++) {
 			mst = array[i].head;
-			while(mst->getNext() != NULL)
-			{
+			while(mst->getNext() != NULL) {
 				mst->setVisitedFalse();
 				mst = mst->getNext();
 			}
@@ -223,8 +217,7 @@ public:
 		mst->setVisitedTrue();
 		//Find minimum path
 		cout << "Root: " << mst->name << endl;
-		for(int i = 0; i < size; i++)
-		{
+		for(int i = 0; i < size; i++) {
 			minW = minWeight(mst->getName());
 			minW->setVisitedTrue();
 			cout << i+1 << ": " << minW->name << endl;
@@ -235,9 +228,7 @@ public:
 	void printGraph()
 	{
 		cout << "PRINT GRAPH" << endl;
-		for (int i = 0; i < graphSize; ++i)
-		{
-			
+		for (int i = 0; i < graphSize; ++i) {
 			cout << "Vertex ";
 			array[i].Head();
 
@@ -255,9 +246,7 @@ public:
 	void addVertex(const string &name, const Type &data)
 	{
 		int index = hash(name);
-
 		array[index].insert(name, data);
-		
 		size++;
 	}
 
@@ -269,16 +258,16 @@ public:
 		int index1 = hash(src);
 		int index2 = hash(dst);
 
-		if(array[index1].head == NULL || array[index2].head == NULL){
+		if(array[index1].head == NULL || array[index2].head == NULL) {
 			cout << "One of these vertices doesn't exist." << endl;
 		}
 
-		else if(index1 == index2){
+		else if(index1 == index2) {
 			cout << "Illegal. Same vertex" << endl;
 		}
 
 		else if(weight == 0) {
-			if(array[index1].find_Node(dst)){
+			if(array[index1].find_Node(dst)) {
 				array[index1].del(dst);
 				array[index2].del(src);
 
@@ -287,11 +276,11 @@ public:
 		}
 
 		else{
-			if(array[index1].find_Node(dst)){
+			if(array[index1].find_Node(dst)) {
 				array[index1].changeWeight(dst, weight);
 				array[index2].changeWeight(src, weight);
 			}
-			else{
+			else {
 				Type data1 = find_Vertex(src);
 				Type data2 = find_Vertex(dst);
 
@@ -303,7 +292,7 @@ public:
 		}
 	}
 
-	/*//Reads structure from a text file and builds a undirected weighted graph.
+	//Reads structure from a text file and builds a undirected weighted graph.
 	void buildGraph()
 	{
 
@@ -314,7 +303,7 @@ public:
 	{
 
 	}
-	*/
+
 	//Iterates over all vertices in the graph and marks them as unvisited.
 	void reset()
 	{
